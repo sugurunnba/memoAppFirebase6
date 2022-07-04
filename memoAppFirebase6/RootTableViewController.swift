@@ -88,7 +88,7 @@ class RootTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            memos.remove(at: indexPath.row)
+            
 
             Firestore.firestore().collection("memos").document(memos[indexPath.row].documentId).delete() { err in
                 if let err = err {
@@ -97,7 +97,10 @@ class RootTableViewController: UITableViewController {
                     print("Document successfully removed!")
                 }
             }
+            memos.remove(at: indexPath.row)
+
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
         }
     }
     
